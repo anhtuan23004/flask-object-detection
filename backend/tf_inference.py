@@ -1,6 +1,7 @@
 from torchvision.version import cuda
 from ultralytics import YOLO
 from backend.config import id2name
+import torch
 
 # Load YOLOv8 model (e.g., yolov8n - nano version for efficiency)
 model = YOLO("models/yolov8n.pt")  # Tải mô hình YOLOv8n (hoặc yolov8s.pt, yolov8m.pt, ...)
