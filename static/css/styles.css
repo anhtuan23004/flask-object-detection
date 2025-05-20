@@ -1,0 +1,36 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.drop-zone {
+    border: 2px dashed #007bff;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    min-height: 100px;
+}
+
+.drop-zone.dragover {
+    background-color: #d0e7ff;
+}
+
+#resultCanvas {
+    max-width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#resultList {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+#saveButton {
+    transition: background-color 0.3s;
+}
+
+#saveButton:hover {
+    background-color: #0056b3;
+}
