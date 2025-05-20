@@ -30,7 +30,7 @@ See `requirements.txt` for a complete list of dependencies.
 1. **Clone the repository**:
    ```bash
    git clone https://github.com/anhtuan23004/flask-object-detection.git
-   cd Flask-Object-Detection
+   cd flask-object-detection
    ```
 
 2. **Create a virtual environment (recommended)**:
@@ -63,7 +63,7 @@ See `requirements.txt` for a complete list of dependencies.
    ├── templates/
    │   ├── index.html
    ├── requirements.txt
-   ├── img1.jpg
+   ├── img1.png
    ```
 
 ## Running the Application
