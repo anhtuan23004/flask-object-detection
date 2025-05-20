@@ -1,17 +1,17 @@
+from torchvision.version import cuda
 from ultralytics import YOLO
-import numpy as np
 from backend.config import id2name
+
 # Load YOLOv8 model (e.g., yolov8n - nano version for efficiency)
 model = YOLO("models/yolov8n.pt")  # Tải mô hình YOLOv8n (hoặc yolov8s.pt, yolov8m.pt, ...)
 
-def load_model():
-    return None, None
-
-def inference(_, __, img_arr, conf_thresh=0.5):
+def inference(img_arr, conf_thresh=0.5):
     try:
         # Chạy YOLOv8 trên hình ảnh
-        results = model.predict(img_arr, conf=conf_thresh, verbose=False)
+        device = 'cuda' if torch.cuda.is_available() else 'cpu'
+        results = model.predict(img_arr, conf=conf_thresh, device=device, verbose=False)
 
+        print(device)
         # Xử lý kết quả
         detections = []
         for result in results[0].boxes:  # Lấy boxes từ kết quả YOLO
