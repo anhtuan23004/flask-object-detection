@@ -4,12 +4,12 @@ import numpy as np
 import base64
 import io
 import logging
+import torch
 
-from backend.tf_inference import load_model, inference
+from backend.tf_inference import inference
 
-# Load model globally
-sess, detection_graph = load_model()  # sess và detection_graph là None với YOLOv8
-
+print('GPU', torch.cuda.is_available())
+print(torch.cuda_version)
 app = Flask(__name__)
 app.logger.setLevel(logging.INFO)
 
@@ -44,7 +44,7 @@ def main_interface():
         if len(img_arr.shape) != 3 or img_arr.shape[2] != 3:
             return jsonify({"error": "Image must be RGB with shape (height, width, 3)"}), 400
 
-        results = inference(sess, detection_graph, img_arr, conf_thresh=0.5)
+        results = inference(img_arr, conf_thresh=0.5)
         app.logger.info(f"Inference results: {results}")
         return jsonify(results)
 
