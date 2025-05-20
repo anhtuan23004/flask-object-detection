@@ -63,7 +63,7 @@ See `requirements.txt` for a complete list of dependencies.
    ├── templates/
    │   ├── index.html
    ├── requirements.txt
-   ├── img1.jpg
+   ├── img1.png
    ```
 
 ## Running the Application
