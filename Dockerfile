@@ -1,24 +1,26 @@
-# Use NVIDIA CUDA base image for GPU support
-FROM nvidia/cuda:12.1.0-base-ubuntu20.04
+# Use Python slim base image (no CUDA)
+FROM python:3.8-slim
 
 # Set working directory
 WORKDIR /app
 
-# Install Python and dependencies
+# Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    python3.8 \
-    python3-pip \
     python3-dev \
     libgl1-mesa-glx \
     libglib2.0-0 \
+    gcc \
+    g++ \
+    libjpeg-dev \
+    zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Upgrade pip
-RUN python3.8 -m pip install --upgrade pip
+RUN pip install --no-cache-dir --upgrade pip
 
 # Copy requirements.txt and install dependencies
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt -f https://download.pytorch.org/whl/cu118
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
 COPY app.py .
@@ -27,7 +29,7 @@ COPY static/ ./static/
 COPY templates/ ./templates/
 
 # Copy YOLOv8 model file
-COPY yolov8n.pt /root/.cache/ultralytics/yolov8n.pt
+COPY models/yolov8n.pt /root/.cache/ultralytics/yolov8n.pt
 
 # Set environment variables
 ENV FLASK_ENV=production
